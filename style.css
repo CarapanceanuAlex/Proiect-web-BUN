@@ -1,0 +1,147 @@
+input {
+    margin: 10px;
+    padding: 3px;
+    border-width: 3px;
+    border-color: gray;
+    border-radius: 5px;
+    font-size: 12px;
+    letter-spacing: 1px;
+}
+
+body {
+    background-color: rgb(59, 104, 145);
+    display: flex;
+    justify-content: center;
+    padding-top: 150px;
+    background-image: url('bananeMulte.jpg');
+    background-size: cover;
+}
+
+.container-signUp {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    width: 400px;
+    height: 450px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.title-signUp {
+    text-align: center;
+    font-size: 30px;
+}
+
+.email-signUp {
+    width: 300px;
+    height: 30px;
+    background-color: rgb(231, 229, 229);
+}
+
+.password-signUp {
+    width: 300px;
+    height: 30px;
+    background-color: rgb(231, 229, 229);
+}
+
+.repeatPassword-signUp {
+    width: 300px;
+    height: 30px;
+    background-color: rgb(231, 229, 229);
+}
+
+.buttonSubmit{
+    margin-top: 15px;
+}
+
+.button-signUp {
+    width: 100px;
+    height: 75px;
+    align-items: center;
+    font-size: x-large;
+    background-color: rgb(228, 209, 39);
+    margin-top: 30px;
+}
+
+.error {
+    color: red; /*face toate erorile rosii*/
+}
+
+/*DE AICI E PAGINA DE SIGN IN */
+
+.container-signIn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: white;
+    width: 400px;
+    height: 450px;
+    /* ASTA FACE COLTURILE ROTUNJITE*/
+    border-radius: 10px;
+    overflow: hidden;
+    /* ASTA FACE COLTURILE ROTUNJITE*/
+}
+
+.title-signIn {
+    text-align: center;
+    font-size: 30px;
+}
+
+.inputField-signin {
+    display: flex;
+    flex-direction: column;
+    height: 200px;
+}
+
+.email-signIn {
+    width: 300px;
+    height: 30px;
+    background-color: rgb(231, 229, 229);
+}
+
+.password-signIn {
+    width: 300px;
+    height: 30px;
+    background-color: rgb(231, 229, 229);
+}
+
+
+.button-signIn {
+    width: 60px;
+    height: 60px;
+    align-items: center;
+    font-size: xx-large;
+    background-color:  rgb(228, 209, 39);
+}
+
+/*DE AICI E MAIN PAGE */
+
+.container-main {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    text-align: center;
+    
+}
+
+#banana {
+    width: 400px;
+    height: 200px;
+}
+
+#main-title {
+    padding-left: 60px;
+    color: rgb(0, 255, 255);
+}
+
+#clickCount {
+    padding-left: 150px;
+    padding-top: 30px; /*impinge in jos*/
+    font-size: xx-large;
+    color: rgb(0, 255, 255);
+}
+
+#clickButton {
+   margin-top: 20px; /*impinge butonul in jos*/
+}
