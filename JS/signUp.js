@@ -14,7 +14,8 @@ function clearError() {
     errorContainer.innerHTML = '';
 }
 
-function submitForm() {
+function submitForm(event) {
+    event.preventDefault() //sa nu dispara erorile instant cand trimitem form-ul ptc se da refresh
     const email = document.getElementById('email-signUp').value;
     const password = document.getElementById('password-signUp').value;
     const retypePassword = document.getElementById('repeatPassword-signUp').value;

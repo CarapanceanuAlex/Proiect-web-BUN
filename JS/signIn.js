@@ -9,7 +9,7 @@ function displayError(message) {
 function signIn() {
     const email = document.getElementById('email-signIn').value;
     const password = document.getElementById('password-signIn').value;
-    event.preventDefault();
+    event.preventDefault(); ////sa nu dispara erorile instant cand trimitem form-ul ptc se da refresh
 
     if (!email || !password) {
         displayError('All fields must be filled');

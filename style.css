@@ -8,7 +8,7 @@ input {
     letter-spacing: 1px;
 }
 
-body {
+.body-signIn_Up {
     background-color: rgb(59, 104, 145);
     display: flex;
     justify-content: center;
@@ -117,12 +117,20 @@ body {
 
 /*DE AICI E MAIN PAGE */
 
-.container-main {
+#container-main {
     display: flex;
     flex-direction: column;
     align-content: center;
-    text-align: center;
-    
+    text-align: center; 
+}
+
+.body-main {
+    background-color: rgb(59, 104, 145);
+    display: flex;
+    justify-content: center;
+    padding-top: 30px;
+    background-image: url('bananeMulte.jpg');
+    background-size: cover;
 }
 
 #banana {
@@ -136,7 +144,6 @@ body {
 }
 
 #clickCount {
-    padding-left: 150px;
     padding-top: 30px; /*impinge in jos*/
     font-size: xx-large;
     color: rgb(0, 255, 255);
@@ -144,4 +151,22 @@ body {
 
 #clickButton {
    margin-top: 20px; /*impinge butonul in jos*/
+}
+
+#achievement-list {
+    text-align: left; /* aliniaza textul incat sa fie in dreptul bulinei */
+    padding-left: 50px; 
+    background-color: white;
+    height: 435px;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+#achievement-title {
+    color: rgb(0, 255, 255);
+    background-color: black;
+}
+
+.Achievements {
+    padding-top: 13px;
 }
