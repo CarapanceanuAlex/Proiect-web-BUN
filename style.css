@@ -156,10 +156,11 @@ input {
 #achievement-list {
     text-align: left; /* aliniaza textul incat sa fie in dreptul bulinei */
     padding-left: 50px; 
-    background-color: white;
+    background-color: black;
     height: 435px;
     border-radius: 10px;
     overflow: hidden;
+    color: white;
 }
 
 #achievement-title {

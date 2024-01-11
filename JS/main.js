@@ -9,56 +9,59 @@ function clickBanana() {
 
 function checkAchievement() {
 
-    if (clickCount === 10) {
-        unlockedAchievement (1, `Your first ${clickCount}!`);
-    }
+    switch (clickCount) {
 
-    if (clickCount === 25) {
-        unlockedAchievement (2, `Your first ${clickCount}!`);
-    }
-
-    if (clickCount === 69) {
-        unlockedAchievement (3, `Nice`);
-    }
-
-    if (clickCount === 100) {
-        unlockedAchievement (4, `WOAH ${clickCount}!`);
-    }
-    
-    if (clickCount === 150) {
-        unlockedAchievement (5, `Oh nice, ${clickCount}!`);
-    }
-       
-    if (clickCount === 200) {
-        unlockedAchievement (6, `Oh nice, ${clickCount}!`);
-    }
-       
-    if (clickCount === 250) {
-        unlockedAchievement (7, `Oh nice, ${clickCount}!`);
-    }
-       
-    if (clickCount === 350) {
-        unlockedAchievement (8, `Oh my god, ${clickCount}!`);
-    }
-           
-    if (clickCount === 450) {
-        unlockedAchievement (9, `Oh my god, ${clickCount}!`);
-    }
-           
-    if (clickCount === 500) {
-        unlockedAchievement (10, `You\`re halfway done, ${clickCount}!`);
-    }
-               
-    if (clickCount === 750) {
-        unlockedAchievement (11, `You can do it, ${clickCount}!`);
-    }
-                   
-    if (clickCount === 999) {
-        unlockedAchievement (12, `ALMOST THERE!!!!!!!!! ${clickCount}`);
-    }
-                       
-    if (clickCount === 1000) {
-        unlockedAchievement (13, `Are you perhaps, acoustic? ${clickCount}`);
+        case 10:
+            unlockedAchievement (1, `Your first ${clickCount}!`);
+            break;
+            
+        case 25:
+            unlockedAchievement (2, `Your first ${clickCount}!`);
+            break;
+            
+        case 69:
+            unlockedAchievement (3, `Nice`);
+            break;
+            
+        case 100:
+            unlockedAchievement (4, `WOAH ${clickCount}!!`);
+            break;
+            
+        case 150:
+            unlockedAchievement (5, `Oh nice ${clickCount}!`);
+            break;
+            
+        case 200:
+            unlockedAchievement (6, `Oh nice ${clickCount}!`);
+            break;
+            
+        case 250:
+            unlockedAchievement (7, `Oh nice ${clickCount}!`);
+            break;
+            
+        case 350:
+            unlockedAchievement (8, `Oh my god, ${clickCount}!`);
+            break;
+            
+        case 450:
+            unlockedAchievement (9, `Oh my god, ${clickCount}!`);
+            break;
+            
+        case 500:
+            unlockedAchievement (10, `You\`re halfway done, ${clickCount}!`);
+            break;
+            
+        case 750:
+            unlockedAchievement (11, `You can do it, ${clickCount}!`);
+            break;
+            
+        case 999:
+            unlockedAchievement (12, `ALMOST THERE!!!!!!!!! ${clickCount}!`);
+            break;
+            
+        case 1000:
+            unlockedAchievement (13, `Are you perhaps, acoustic? ${clickCount}!`);
+            break;
     }
 }
 
