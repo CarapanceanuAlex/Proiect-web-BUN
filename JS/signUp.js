@@ -73,7 +73,7 @@ function submitForm(event) {
     .then(response => response.json())
     .then(data => {
         console.log(data); // You can handle the response from the server here
-        // For example, you may redirect the user or display a success message
+        console.log('BINE BAAAAAAAAAAAA')
     })
     .catch(error => console.error('Error:', error));
 }

@@ -5,7 +5,7 @@ import sqlite3
 app = Flask(__name__)
 CORS(app)
 
-DATABASE = r'C:\Users\Alex\Documents\GitHub\PROIECT\DB\BD Proiect WEB.db'
+DATABASE = r'DB\BD Proiect WEB.db'
 
 def connect_db():
     return sqlite3.connect(DATABASE)
@@ -43,7 +43,7 @@ def signin():
             return jsonify({'error': 'Incorrect email or password'}), 401
 
         # If login is successful, redirect to main.html
-        return redirect(url_for('main_page'))
+        return redirect(url_for('main_page')) 
 
     except Exception as e:
         return jsonify({'error': str(e)}), 500
