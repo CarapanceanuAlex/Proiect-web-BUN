@@ -69,6 +69,10 @@ input {
     color: red; /*face toate erorile rosii*/
 }
 
+.success {
+    color: green; /*face mesajele de success verzi*/
+}
+
 /*DE AICI E PAGINA DE SIGN IN */
 
 .container-signIn {

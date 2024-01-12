@@ -8,20 +8,25 @@
 
     <body  class="body-signIn_Up">
         <form onsubmit="submitForm(event)">
-        <div class="container-signUp">
-            <h2 class="title-signUp">Sign up</h2>
-                <input id="email-signUp" class="email-signUp" type="text" placeholder="Email...">
-                <input id="password-signUp"class="password-signUp" type="password" placeholder="Password...">
-                <input id="repeatPassword-signUp"class="repeatPassword-signUp" type="password" placeholder="Retype password...">
-                <button class="buttonSubmit" type="submit" >
-                    Submit
-                </button>
-                <button class="button-signUp" onclick="redirectToSignIn()">
-                    Go to sign in
-                </button>
-                <div id="errorContainer"></div>
-            <script src="JS\signUp.js"></script>
-        </div>
+            <div class="container-signUp">
+                <h2 class="title-signUp">Sign up</h2>
+                    <input id="email-signUp" class="email-signUp" type="text" placeholder="Email...">
+                    <input id="password-signUp"class="password-signUp" type="password" placeholder="Password...">
+                    <input id="repeatPassword-signUp"class="repeatPassword-signUp" type="password" placeholder="Retype password...">
+
+                    <button class="buttonSubmit" type="submit">
+                        Submit
+                    </button>
+
+                    <button class="button-signUp" onclick="redirectToSignIn()">
+                        Go to sign in
+                    </button>
+
+                    <div id="errorContainer"></div>
+                    <div id="successContainer"></div>
+
+                <script src="JS\signUp.js"></script>
+            </div>
         </form>
     </body>
 </html>
