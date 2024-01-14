@@ -18,13 +18,15 @@ def register():
         data = request.get_json()
         print("Received data:", data)
         # check data validity
+        if not all(key in body for key in ("email", "password", "retype_password")):
+            raise ValueError("All fields must be filled")
+
         if body["password"] != body["retype_password"]:
-            response = {
-                "message": f"Password mismatch."
-            }
-            response = jsonify(response)
-            response.headers.add("Access-Control-Allow-Origin", "*")
-            return response, 400
+            raise ValueError("Password mismatch")
+
+        if len(body["password"]) < 6 or len(body["password"]) > 20 or body["password"] == 'password':
+            raise ValueError("Invalid password")
+
         
         # create new user 
         # open a new connection to db

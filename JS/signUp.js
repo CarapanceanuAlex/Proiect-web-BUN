@@ -1,30 +1,38 @@
-//function redirectToSignIn() {
-//    window.location.href = 'signIn.html';
-//}
-//
-//function displaySuccess(message) {
-//    // functie care afiseaza un mesaj de success pe ecran cand toate validarile sunt ok
-//    const successContainer = document.getElementById('successContainer');
-//    successContainer.innerHTML = `<p class="success">${message}</p>`;
-//}
-//
-//function clearSuccess() {
-//    // functie care sterge mesajul de success
-//    const successContainer = document.getElementById('successContainer');
-//    successContainer.innerHTML = '';
-//}
-//
-//function displayError(message) {
-//    // Display error message on the screen
-//    const errorContainer = document.getElementById('errorContainer');
-//    errorContainer.innerHTML = `<p class="error">${message}</p>`;
-//}
-//
-//function clearError() {
-//    // Clear any previous error messages
-//    const errorContainer = document.getElementById('errorContainer');
-//    errorContainer.innerHTML = '';
-//}
+
+function displaySuccess(message) {
+    // functie care afiseaza un mesaj de success pe ecran cand toate validarile sunt ok
+    const successContainer = document.getElementById('successContainer');
+    successContainer.innerHTML = `<p class="success">${message}</p>`;
+}
+
+function clearSuccess() {
+    // functie care sterge mesajul de success
+    const successContainer = document.getElementById('successContainer');
+    successContainer.innerHTML = '';
+}
+
+function displayError(message) {
+    // Display error message on the screen
+    const errorContainer = document.getElementById('errorContainer');
+    errorContainer.innerHTML = `<p class="error">${message}</p>`;
+}
+
+function clearError() {
+    // Clear any previous error messages
+    const errorContainer = document.getElementById('errorContainer');
+    errorContainer.innerHTML = '';
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    console.log('DOMContentLoaded event fired');
+    const formSignUp = document.getElementById('formSignUp');
+
+    formSignUp.addEventListener('submit', function (event) {
+        event.preventDefault();
+        console.log('Form submit prevented'); // Add this line
+        submit();
+    });
+});
 
 //`````````````````````````````````````````````````````````````````````````````````
 function submit() {
@@ -34,7 +42,49 @@ function submit() {
     const password = inputs[1].value; 
     const retypePassword = inputs[2].value;
 
-    console.log('Submit function called');
+    if (!email || !password || !retypePassword) {
+        clearSuccess()
+        displayError('All fields must be filled');
+        return;
+    }
+
+    if (password.length < 6) {
+        clearSuccess()
+        displayError('Password must be at least 6 characters long');
+        return;
+    }
+
+    if (password.length > 20) {
+        clearSuccess()
+        displayError('Password must be less than 20 characters long');
+        return;
+    }
+
+    if (password === 'password') {
+        clearSuccess()
+        displayError('Serios? Pune ba o parola adevarata');
+        return;
+    }
+
+    if (password !== retypePassword) {
+        clearSuccess()
+        displayError('Your retyped password doesn\'t match');
+        return;
+    }
+
+    if (password.length <= 6) {
+        clearSuccess()
+        displayError('The password must be atleast 6 char. long');
+        return;
+    }
+
+    if (email || password == retypePassword) {
+        clearError();
+        displaySuccess('Successfully signed up');
+        return;
+    }
+
+    console.log('TRB SA SCRIE ASTA IN CONSOLA');
 
     const data = {
         "email": email,
@@ -61,6 +111,8 @@ function submit() {
 
     // send the data 
     request.send(jsonData);
+
+    console.log('SI ASTA MAI TREBUIE SA scrie');
 
     function processRequestToSendDataResponse() {
         const response = JSON.parse(request.response);
@@ -91,9 +143,4 @@ function submit() {
     }
 }
 
-document.addEventListener('DOMContentLoaded', function () {
-    document.getElementById('formSignUp').addEventListener('submit', function (event) {
-        event.preventDefault();
-        submit(event);
-    });
-});
+
