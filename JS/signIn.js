@@ -5,41 +5,64 @@ function displayError(message) {
 }
 
 
-// Send the sign-in data to the server using a fetch request
-function signIn() {
-    const email = document.getElementById('email-signIn').value;
-    const password = document.getElementById('password-signIn').value;
-    event.preventDefault(); ////sa nu dispara erorile instant cand trimitem form-ul ptc se da refresh
+function signin() {
+    // get data from inputs 
+    const inputs = document.getElementsByTagName("input");
+    const email = inputs[0].value;
+    const password = inputs[1].value; 
+    event.preventDefault();
 
-    if (!email || !password) {
-        displayError('All fields must be filled');
-        return;
-    }
-    //const userData = {email: email, password: password};
+    const data = {
+        "email": email,
+        "password": password
+    } 
+    const jsonData = JSON.stringify(data);
 
-    // Send the sign-in data to the server using a fetch request
-    fetch('http://127.0.0.1:5000/signin', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email, password }),
-    })
-    .then(response => {
-        console.log('Response Status:', response.status);  // Log the HTTP status code
-        return response.json();
-    })
-    .then(data => {
-        console.log('Response Data:', data);  // Log the response body
-        if (data.success) {
-            window.location.href = 'main.html';  // Redirect to main.html on successful login
-        } else {
-            displayError('Invalid email or password'); // Display an error message
+    // build a request object
+    const request = new XMLHttpRequest();
+
+    // open a connection to my api 
+    request.open("POST", "http://localhost:5501/api/v1/authenticate");
+
+    // customise the request 
+    request.setRequestHeader("Access-Control-Allow-Credentials", "true");
+    request.setRequestHeader("Content-Type", "application/json");
+    
+    // specify what happens when data arrives 
+    request.onload = processRequestToSendDataResponse;
+    
+    // specify what happens when an error occurs
+    request.onerror = processErrorResponse; 
+
+    // send the data 
+    request.send(jsonData);
+
+    function processRequestToSendDataResponse() {
+        const response = JSON.parse(request.response);
+
+        if (request.status == 200) {
+            localStorage.setItem("user-id", response.data.user_id);
+            // sessionStorage.setItem("user-id", response.data.user_id);
+            window.location.replace("main.html")
         }
-    })
-    .catch(error => {
-        console.error('Error:', error.message);
-        displayError('Failed to fetch resource. Please try again.'); // Display a generic error message
-    });
+    }
+
+    function processErrorResponse() {
+        const response = JSON.parse(request.response);
+        
+        if (request.status == 400 || request.status == 500) {
+            const errorMessage = document.getElementById("errorContainer");
+            if (errorMessage) {
+                errorMessage.innerText = response.message;
+            } else {
+                const p = document.createElement("p");
+                p.id = "error-message"
+                p.innerText = response.message;
+                p.className = "error-message";
+                const body = document.getElementsByTagName("body")[0];
+                body.appendChild(h1);
+            }
+        }
+    }
 }
     

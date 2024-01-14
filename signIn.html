@@ -7,19 +7,21 @@
     </head>
 
     <body class="body-signIn_Up"> 
-        <form onsubmit="signIn(event)">
+        <form>
         <div class="container-signIn">
             <h2 class="title-signIn">Sign in</h2>
                 <div class="inputField-signin">
                     <input id="email-signIn" class="email-signIn" type="text" placeholder="Email...">
                     <input id="password-signIn" class="password-signIn" type="password" placeholder="Password...">
                 </div>
-            <button class="button-signIn" onclick="signIn()">
+            <button class="button-signIn" onclick="signin()">
                 ➪
             </button>
 
             <p><a href="signUp.html">Don't have an account? Sign up here</a></p>
+
             <div id="errorContainer"></div>
+            
             <script src="JS/signIn.js"></script>
         </div>
         </form>

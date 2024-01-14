@@ -7,20 +7,18 @@
     </head>
 
     <body  class="body-signIn_Up">
-        <form onsubmit="submitForm(event)">
+        <form id="formSignUp" onsubmit="submit()">
             <div class="container-signUp">
                 <h2 class="title-signUp">Sign up</h2>
                     <input id="email-signUp" class="email-signUp" type="text" placeholder="Email...">
                     <input id="password-signUp"class="password-signUp" type="password" placeholder="Password...">
                     <input id="repeatPassword-signUp"class="repeatPassword-signUp" type="password" placeholder="Retype password...">
 
-                    <button class="buttonSubmit" type="submit">
+                    <button class="button-signUp" type="submit">
                         Submit
                     </button>
 
-                    <button class="button-signUp" onclick="redirectToSignIn()">
-                        Go to sign in
-                    </button>
+                    <p><a href="signIn.html">Already have an account? Log in here</a></p>
 
                     <div id="errorContainer"></div>
                     <div id="successContainer"></div>

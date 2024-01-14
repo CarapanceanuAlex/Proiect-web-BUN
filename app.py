@@ -1,56 +1,126 @@
-from flask import Flask, request, jsonify, redirect, url_for
+from flask import Flask, request, jsonify, send_from_directory
 from flask_cors import CORS
+
 import sqlite3
 
 app = Flask(__name__)
-CORS(app)
+CORS(app, resources={r"/api/*": {"origins": "http://localhost:5501"}}) #permite requesturi din orice origine
 
-DATABASE = r'DB\BD Proiect WEB.db'
+@app.route('/<path:path>')
+def send_html(path):
+    return send_from_directory('', path)
 
-def connect_db():
-    return sqlite3.connect(DATABASE)
+@app.route("/api/v1/register", methods=["POST"])
+def register():
+    body = request.json 
 
-@app.route('/signup', methods=['POST'])
-def signup():
     try:
         data = request.get_json()
-        email = data.get('email')
-        password = data.get('password')
+        print("Received data:", data)
+        # check data validity
+        if body["password"] != body["retype_password"]:
+            response = {
+                "message": f"Password mismatch."
+            }
+            response = jsonify(response)
+            response.headers.add("Access-Control-Allow-Origin", "*")
+            return response, 400
+        
+        # create new user 
+        # open a new connection to db
+        connection = sqlite3.connect("DB/User.db")
 
-        with connect_db() as connection:
-            cursor = connection.cursor()
-            cursor.execute('INSERT INTO Users (UserEmail, UserPassword) VALUES (?, ?)', (email, password))
-            connection.commit()
+        # define SQL query to run
+        query = f"""INSERT INTO Users(Email, Password) VALUES ('{body["email"]}', '{body["password"]}')"""
 
-        return jsonify({'message': 'User registered successfully'}), 200
+        # create a new cursor
+        cursor = connection.cursor()
 
+        # execute query
+        cursor.execute(query)
+        
+        # permanently save data to db
+        connection.commit()
+
+        # get new user's id 
+        # define SQL query to get user id
+        query = f"""select id from Users where Email='{body["email"]}'"""
+
+        # run query 
+        user_id = list(cursor.execute(query))[0][0]
+
+        # close connection to db
+        connection.close()
+
+        # create response
+        response = {
+            "data": {
+                "user_id": user_id
+            }
+        }
+        response = jsonify(response)
+        response.headers.add("Access-Control-Allow-Origin", "*")
+        return response, 200
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        # codul pt erori 
+        response = {
+            "message": f"Something went wrong. Cause: {e}."
+        }
+        response = jsonify(response)
+        response.headers.add("Access-Control-Allow-Origin", "*")
+        return response, 500
 
-@app.route('/signin', methods=['POST'])
-def signin():
+@app.route("/api/v1/authenticate", methods=["POST"])
+def authenticate():
+    body = request.json 
+
     try:
-        data = request.get_json()
-        email = data.get('email')
-        password = data.get('password')
+        # get existing new user 
+        # open a new connection to db
+        connection = sqlite3.connect("DB/User.db")
 
-        with connect_db() as connection:
-            cursor = connection.cursor()
-            cursor.execute('SELECT * FROM Users WHERE UserEmail = ? AND UserPassword = ?', (email, password))
-            user = cursor.fetchone()
+        # define SQL query to run
+        query = f"""select id, Email, Password from Users where Email='{body["email"]}'"""
 
-        if user is None:
-            return jsonify({'error': 'Incorrect email or password'}), 401
+        # create a new cursor
+        cursor = connection.cursor()
 
-        # If login is successful, redirect to main.html
-        return redirect(url_for('main_page')) 
+        # execute query
+        user_details = list(cursor.execute(query))[0]
+        
+        # check if user exists
+        if len(user_details) > 0:
+            # check if provided password matches existing password
+            if body["password"] != user_details[2]:
+                response = {
+                    "message": f"Password mismatch."
+                }
+                response = jsonify(response)
+                response.headers.add("Access-Control-Allow-Origin", "*")
+                return response, 400
+            
+            user_id = user_details[0]   
 
+            # close connection to db
+            connection.close()
+
+            # create response
+            response = {
+                "data": {
+                    "user_id": user_id
+                }
+            }
+            response = jsonify(response)
+            response.headers.add("Access-Control-Allow-Origin", "*")
+            return response, 200
     except Exception as e:
-        return jsonify({'error': str(e)}), 500
+        # codul pt erori 
+        response = {
+            "message": f"Something went wrong. Cause: {e}."
+        }
+        response = jsonify(response)
+        response.headers.add("Access-Control-Allow-Origin", "*")
+        return response, 500
 
-@app.route('/main')
-def main_page():
-    return jsonify({'message': 'Welcome to the main page!'}), 200
-
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == "__main__":
+    app.run(debug=True, port=5501)
